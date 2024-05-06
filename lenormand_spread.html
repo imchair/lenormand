@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lenormand Grand Tableau Spread Generator</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lenormand Grand Tableau Spread Generator</h1>
+  <button onclick="generateSpread()">Generate Spread</button>
+  <br><br>
+  <table id="mainSpread"></table>
+  <br>
+  <table id="additionalSpread"></table>
+
+  <script>
+    const words = ["Rider", "Clover", "Ship", "House", "Tree", "Clouds", "Snake", "Coffin", "Bouquet", "Scythe", "Whip", "Birds", "Child", "Fox", "Bear", "Stars", "Stork", "Dog", "Tower", "Garden", "Mountain", "Crossroads", "Mice", "Heart", "Ring", "Book", "Letter", "Man", "Woman", "Lily", "Sun", "Moon", "Key", "Fish", "Anchor", "Cross"];
+
+    function generateSpread() {
+      const shuffledWords = shuffle(words);
+      
+      const mainSpread = document.getElementById("mainSpread");
+      mainSpread.innerHTML = "";
+      for (let i = 0; i < 4; i++) {
+        const row = mainSpread.insertRow();
+        for (let j = 0; j < 8; j++) {
+          const cell = row.insertCell();
+          cell.innerHTML = shuffledWords[i * 8 + j];
+        }
+      }
+
+      const additionalSpread = document.getElementById("additionalSpread");
+      additionalSpread.innerHTML = "";
+      const row = additionalSpread.insertRow();
+      for (let i = 0; i < 4; i++) {
+        const cell = row.insertCell();
+        cell.innerHTML = shuffledWords[32 + i];
+      }
+    }
+
+    function shuffle(array) {
+      const shuffledArray = [...array];
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      }
+      return shuffledArray;
+    }
+  </script>
+</body>
+</html>
